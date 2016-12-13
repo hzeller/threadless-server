@@ -1,0 +1,6 @@
+Experimenting with C++11 closures and Unix select() to make an easy-to-use and
+readable threadless server, multiplexing connections, all handled in the main
+loop without extra threads needed.
+
+Nothing interesting to see here, just experiments. Real world would use libev
+or libevent or something.
