@@ -2,9 +2,10 @@
 
 #include "fd-mux.h"
 
-#include <vector>
-
+#include <stdio.h>
 #include <sys/select.h>
+
+#include <vector>
 
 bool FDMultiplexer::RunOnReadable(int fd, const Handler &handler) {
     return handlers_.insert({ fd, handler }).second;

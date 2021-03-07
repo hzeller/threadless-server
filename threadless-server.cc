@@ -1,9 +1,12 @@
 // -*- mode: c++; c-basic-offset: 4; indent-tabs-mode: nil; -*-
 //
 // Simple test for multiplexing server, handling connections in parallel.
+
 #include <arpa/inet.h>
+#include <ctype.h>
 #include <errno.h>
 #include <signal.h>
+#include <stdio.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
