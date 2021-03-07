@@ -1,13 +1,10 @@
 // -*- mode: c++; c-basic-offset: 4; indent-tabs-mode: nil; -*-
 //
-// Simple test for multiplexing server, handling connections in parallel.
+// Simple fortune teller: on connect, the client gets a line of fortune.
 
 #include <arpa/inet.h>
-#include <ctype.h>
-#include <errno.h>
 #include <signal.h>
 #include <stdio.h>
-#include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -54,8 +51,8 @@ int main(int, char *[]) {
         "Don't Worry, Be Happy.\n",
     };
 
-    FDMultiplexer *fmux = new FDMultiplexer();
-    int listen_socket = create_bound_socket(kPort);
+    FDMultiplexer *const fmux = new FDMultiplexer();
+    const int listen_socket = create_bound_socket(kPort);
     if (listen_socket < 0)
         return 1;
 
@@ -66,10 +63,10 @@ int main(int, char *[]) {
 
     fprintf(stderr, "Listening on %d\nQuery e.g. with\n\tnc localhost %d\n",
             kPort, kPort);
+
     int next_fortune = 0;
 
     // 'Readable' on a listen socket is if there is a new connection waiting.
-    // So we spawn a new connection which handles reads until it is done.
     fmux->RunOnReadable(listen_socket, [listen_socket, &next_fortune]() {
         const int fd = accept(listen_socket, nullptr, nullptr);
         if (fd < 0) return true;
