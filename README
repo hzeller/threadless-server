@@ -4,3 +4,6 @@ loop without extra threads needed.
 
 Nothing interesting to see here, just experiments. Real world would use libev
 or libevent or something.
+
+threadless-server : a simple echo server, listing on port 3000
+fortune-teller    : an even simpler fortune teller server, listening on 3001
